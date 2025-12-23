@@ -1,0 +1,55 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-core-labels
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  # ---- Namespaces MUST have labels (cluster-wide) ----
+  - name: require-labels-on-ns
+    match:
+      resources:
+        kinds: ["Namespace"]
+    validate:
+      message: "Namespaces must have labels: owner, team, cost-center"
+      pattern:
+        metadata:
+          labels:
+            owner: "?*"
+            team: "?*"
+            cost-center: "?*"
+
+  # ---- Deployments must have labels, EXCEPT infra/system namespaces ----
+  - name: require-labels-on-deploy
+    match:
+      resources:
+        kinds: ["Deployment"]
+    exclude:
+      resources:
+        namespaces: ["kube-system","kube-public","kube-node-lease","kyverno","monitoring","opencost","default"]
+    validate:
+      message: "Deployments must have labels: owner, team, cost-center"
+      pattern:
+        metadata:
+          labels:
+            owner: "?*"
+            team: "?*"
+            cost-center: "?*"
+
+  # ---- Services must have labels, EXCEPT infra/system namespaces ----
+  - name: require-labels-on-svc
+    match:
+      resources:
+        kinds: ["Service"]
+    exclude:
+      resources:
+        namespaces: ["kube-system","kube-public","kube-node-lease","kyverno","monitoring","opencost","default"]
+    validate:
+      message: "Services must have labels: owner, team, cost-center"
+      pattern:
+        metadata:
+          labels:
+            owner: "?*"
+            team: "?*"
+            cost-center: "?*"

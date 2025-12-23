@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+  labels: { owner: platform, team: sre, cost-center: core }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: opencost
+  labels: { owner: platform, team: sre, cost-center: core }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: platform
+  labels: { owner: platform, team: sre, cost-center: core }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apps-dev
+  labels: { owner: apps, team: web, cost-center: dev }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apps-staging
+  labels: { owner: apps, team: web, cost-center: staging }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apps-prod
+  labels: { owner: apps, team: web, cost-center: prod }

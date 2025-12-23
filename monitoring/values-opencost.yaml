@@ -1,0 +1,16 @@
+opencost:
+  exporter:
+    defaultModelPricing: true
+    cloudProviderApiKey: ""
+    cloudProvider: generic
+    prometheus:
+      external:
+        enabled: false
+      internal:
+        serviceName: kube-prometheus-stack-prometheus
+        namespaceName: monitoring
+        port: 9090
+      # Use the svc you saw in step (1). Here are two common correct options:
+      # serverEndpoint: http://kube-prometheus-stack-prometheus.monitoring:9090
+      # serverEndpoint: http://prometheus-operated.monitoring:9090
+      serverEndpoint: http://kube-prometheus-stack-prometheus.monitoring:9090

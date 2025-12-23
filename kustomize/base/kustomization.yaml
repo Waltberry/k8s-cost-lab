@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - frontend-deploy.yaml
+  - frontend-svc.yaml
+  - api-deploy.yaml
+  - api-svc.yaml
+  - redis-deploy.yaml
+  - redis-svc.yaml
+commonLabels:
+  app.kubernetes.io/part-of: demo-microapp
+  owner: apps
+  team: web
+  cost-center: dev
