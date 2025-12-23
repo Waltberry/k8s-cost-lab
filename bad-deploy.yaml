@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unlabeled-should-fail
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: unlabeled-should-fail } }
+  template:
+    metadata:
+      labels: { app: unlabeled-should-fail }
+    spec:
+      containers:
+      - name: c
+        image: nginx:1.25
